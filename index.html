@@ -1,13 +1,39 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="TERAH2O — Simulador de planta de tratamiento de agua potable convencional. Inteligencia operativa para la gestión hídrica.">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BTCG86051E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BTCG86051E');
+</script>
 <meta property="og:title" content="TERAH2O — Simulador PTA">
 <meta property="og:description" content="Simulación completa de planta de tratamiento de agua potable. Prueba de jarras, normas EC/CO/PE, informe PDF.">
 <meta property="og:type" content="website">
 <title>TERAH2O — Simulador de Planta de Tratamiento</title>
+<template id="__bundler_thumbnail" data-bg-color="#080C18">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1e88e5"/>
+        <stop offset="1" stop-color="#0d47a1"/>
+      </linearGradient>
+    </defs>
+    <!-- Gota de agua estilizada -->
+    <path d="M600 180 C 460 360, 400 470, 400 560 C 400 670, 490 750, 600 750 C 710 750, 800 670, 800 560 C 800 470, 740 360, 600 180 Z" fill="url(#g1)" stroke="#64b5f6" stroke-width="4"/>
+    <!-- Highlight -->
+    <ellipse cx="540" cy="460" rx="40" ry="80" fill="#bbdefb" opacity="0.35"/>
+    <!-- Texto -->
+    <text x="600" y="110" text-anchor="middle" fill="#64b5f6" font-family="Segoe UI, sans-serif" font-size="62" font-weight="300" letter-spacing="8">TERAH2O</text>
+    <text x="600" y="150" text-anchor="middle" fill="#4a7294" font-family="Segoe UI, sans-serif" font-size="20" letter-spacing="6">SIMULADOR PTA</text>
+  </svg>
+</template>
 <style>
 /* ── RESET ── */
 *{box-sizing:border-box;margin:0;padding:0}
@@ -76,8 +102,8 @@ body{font-family:'Segoe UI',sans-serif;background:#080C18;color:#c0d8f2;font-siz
 .qb{margin-left:auto;display:flex;align-items:center;gap:10px;background:var(--sf2);border:1px solid var(--bd2);border-radius:10px;padding:8px 14px}
 .ql{font-size:11px;color:var(--mt)}.qn{font-size:24px;font-weight:500;color:#fff;min-width:40px;text-align:right}.qu{font-size:11px;color:var(--mt)}.qd{font-size:11px;color:var(--mt);line-height:2}
 input[type=range]{cursor:pointer;accent-color:var(--hi)}
-.rpt-btn{background:rgba(0,200,83,.1);color:var(--ok);border:1px solid rgba(0,200,83,.3);border-radius:8px;padding:7px 12px;font-size:11px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;transition:.15s;font-family:'Segoe UI',sans-serif;white-space:nowrap}
-.rpt-btn:hover{background:rgba(0,200,83,.22)}
+.rpt-btn{background:rgba(41,121,255,.12);color:var(--hi);border:1px solid var(--bd2);border-radius:8px;padding:8px 16px;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px;transition:.15s;font-family:'Segoe UI',sans-serif;white-space:nowrap}
+.rpt-btn:hover{background:rgba(41,121,255,.25);color:#fff}
 .normbar{background:var(--sf2);border-bottom:1px solid var(--bd);padding:7px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .normbar-group{display:flex;align-items:center;gap:8px}
 .normbar-lbl{font-size:11px;color:var(--mt);white-space:nowrap}
@@ -87,6 +113,16 @@ input[type=range]{cursor:pointer;accent-color:var(--hi)}
 .simbar-lbl{font-size:11px;color:var(--mt);white-space:nowrap}
 .simbar-inp{flex:1;background:var(--sf);color:#fff;border:1px solid var(--bd2);border-radius:7px;padding:5px 10px;font-size:12px;font-family:'Segoe UI',sans-serif;outline:none;max-width:500px}
 .simbar-inp::placeholder{color:var(--mt);font-size:11px}
+.calib-box{margin-top:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:10px 12px}
+.calib-hdr{margin-bottom:8px}
+.calib-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.calib-btn{background:var(--sf2);color:var(--mt);border:1px solid var(--bd);border-radius:6px;padding:5px 12px;font-size:11px;cursor:pointer;transition:.15s;font-family:'Segoe UI',sans-serif;display:inline-block}
+.calib-btn:hover{background:rgba(41,121,255,.15);color:var(--hi);border-color:var(--ac)}
+.calib-table{width:100%;margin-top:8px;font-size:11px;color:var(--mt);border-collapse:collapse}
+.calib-table th,.calib-table td{padding:4px 8px;border:1px solid var(--bd);text-align:center}
+.calib-table th{background:var(--sf2);color:#fff;font-weight:500;font-size:10px}
+.calib-table tr.opt td{background:rgba(0,200,83,.1);color:var(--ok);font-weight:500}
+.calib-note{font-size:10px;color:var(--mt);margin-top:4px;font-style:italic}
 #plantCv{display:block;width:100%;background:var(--sf);border-bottom:1px solid var(--bd)}
 .mrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--bd)}
 .met{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:10px 13px}
@@ -146,7 +182,7 @@ table.rt{width:100%;border-collapse:collapse;font-size:11px;background:var(--sf)
 .cs-param{font-size:11px;color:var(--mt);margin-bottom:3px}.cs-val{font-size:14px;font-weight:500}.cs-limit{font-size:10px;color:var(--mt);margin-top:2px}
 .cs-ok{border-color:rgba(0,200,83,.35)}.cs-fail{border-color:rgba(255,23,68,.35)}.cs-warn{border-color:rgba(255,145,0,.35)}
 .norm-comply{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:500}
-.nc-ok{background:rgba(0,200,83,.12);color:var(--ok)}.nc-fail{background:rgba(255,23,68,.12);color:var(--er)}.nc-na{background:rgba(74,114,148,.12);color:var(--mt)}
+.nc-ok{background:rgba(74,114,148,.12);color:var(--mt)}.nc-fail{background:rgba(255,23,68,.12);color:var(--er)}.nc-na{background:rgba(74,114,148,.12);color:var(--mt)}
 
 /* ── CONTACT FOOTER ── */
 .contact-footer{background:#050e20;border-top:1px solid var(--bd);padding:20px 24px}
@@ -173,16 +209,37 @@ table.rt{width:100%;border-collapse:collapse;font-size:11px;background:var(--sf)
 .eb1{background:rgba(41,121,255,.1);color:var(--hi);border:1px solid var(--bd2)}
 .eb2{background:rgba(255,145,0,.1);color:var(--wn);border:1px solid rgba(255,145,0,.2)}
 .eb3{font-size:10px;color:var(--mt)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;display:flex;align-items:center;justify-content:center}
+.modal-overlay.hidden{display:none}
+.modal-box{background:var(--sf);border:1px solid var(--bd2);border-radius:14px;padding:20px;min-width:340px;max-width:420px;display:flex;flex-direction:column;gap:8px}
+.mopt{background:var(--sf2);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;display:flex;gap:12px;align-items:center;cursor:pointer;color:var(--tx);font-family:'Segoe UI';text-align:left;transition:.15s}
+.mopt:hover{border-color:var(--bd2);background:rgba(41,121,255,.08)}
+.mopt-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mopt-text{flex:1}
+.mopt-title{font-size:12px;font-weight:500;color:#fff}
+.mopt-sub{font-size:10px;color:var(--mt);margin-top:2px}
+.mcancel{background:transparent;border:1px solid var(--bd);color:var(--mt);border-radius:8px;padding:8px;font-size:11px;cursor:pointer;margin-top:4px}
+.mcancel:hover{color:var(--tx)}
+.dtype-group{display:flex;align-items:center;gap:8px}
+.dtype-btn{background:var(--sf);color:var(--mt);border:1px solid var(--bd);border-radius:7px;padding:5px 11px;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:.15s;font-family:'Segoe UI'}
+.dtype-btn.on.real{background:rgba(0,200,83,.15);color:var(--ok);border-color:rgba(0,200,83,.35)}
+.dtype-btn.on.emp{background:rgba(255,145,0,.15);color:var(--wn);border-color:rgba(255,145,0,.35)}
+.dtype-btn:not(.on):hover{border-color:var(--bd2)}
+#pBit{grid-template-columns:1fr}
+.bit-entry{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:11px 14px;margin-bottom:8px}
+.bit-hdr{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.bit-name{font-size:12px;font-weight:500;color:#fff;flex:1}
+.bit-badge{font-size:9px;font-weight:500;padding:2px 7px;border-radius:4px}
+.bit-real{background:rgba(0,200,83,.12);color:var(--ok)}
+.bit-emp{background:rgba(255,145,0,.12);color:var(--wn)}
+.bit-date{font-size:10px;color:var(--mt)}
+.bit-params{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
+.bit-param{font-size:10px;color:var(--mt);display:flex;flex-direction:column;background:var(--sf2);padding:5px 8px;border-radius:5px}
+.bit-param b{font-size:11px;color:var(--tx);font-weight:500}
+.bit-result{display:flex;align-items:center;gap:10px;justify-content:space-between}
+.bit-empty{text-align:center;padding:30px 14px;color:var(--mt);font-size:12px}
+.bit-empty-icon{font-size:28px;margin-bottom:8px}
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BTCG86051E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-BTCG86051E');
-</script>
 </head>
 <body>
 
@@ -234,7 +291,7 @@ table.rt{width:100%;border-collapse:collapse;font-size:11px;background:var(--sf)
     </div>
 
     <div class="sp-contact">
-      <a href="mailto:teraserviciosprofesionales@outlook.com">teraserviciosprofesionales@outlook.com</a>
+      <a href="/cdn-cgi/l/email-protection#7400110615071106021d171d1b0704061b1211071d1b1a15181107341b0100181b1b1f5a171b19"><span class="__cf_email__" data-cfemail="5125342330223423273832383e2221233e373422383e3f303d3422113e24253d3e3e3a7f323e3c">[email&#160;protected]</span></a>
       &nbsp;·&nbsp;
       <a href="https://wa.me/16084489126">+1 608 448 9126</a>
       &nbsp;·&nbsp;
@@ -257,9 +314,9 @@ table.rt{width:100%;border-collapse:collapse;font-size:11px;background:var(--sf)
   <div class="hdiv"></div>
   <div class="htitle"><b>Simulador</b>Planta de Tratamiento de Agua Potable Convencional</div>
   <div style="margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-    <button class="rpt-btn" onclick="generateReport()">
-      <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M4 0h5.5L13 3.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5 1v3h3L9 1zM4 7a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4zm0 2a.5.5 0 0 0 0 1h8a.5.5 0 0 0 0-1H4zm0 2a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H4z"/></svg>
-      Informe PDF
+    <button class="rpt-btn" onclick="openReport()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v2H8v-2zm0-4h8v2H8v-2z"/></svg>
+      Generar Informe PDF
     </button>
     <div class="qb">
       <span class="ql">Caudal Q</span>
@@ -278,9 +335,60 @@ table.rt{width:100%;border-collapse:collapse;font-size:11px;background:var(--sf)
     <button class="norm-btn" id="nPe" onclick="setNorm('pe')">🇵🇪 Perú</button>
   </div>
   <div class="hdiv"></div>
+  <div class="dtype-group">
+    <span class="normbar-lbl">Tipo de datos:</span>
+    <button class="dtype-btn real on" id="dtReal" onclick="setDataType('real')">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+      Planta Real
+    </button>
+    <button class="dtype-btn emp" id="dtEmp" onclick="setDataType('empirico')">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+      Datos Empíricos
+    </button>
+  </div>
+  <div class="hdiv"></div>
+  <div class="normbar-group">
+    <span class="normbar-lbl">Evento:</span>
+    <button class="norm-btn on" id="evNorm" onclick="setEvent('normal')" title="Condiciones normales">🌤 Normal</button>
+    <button class="norm-btn" id="evRain" onclick="setEvent('rain')" title="Lluvia intensa: turbidez alta">🌧 Lluvia</button>
+    <button class="norm-btn" id="evCold" onclick="setEvent('cold')" title="Deshielo/frío: baja T, turbidez media">❄ Frío</button>
+    <button class="norm-btn" id="evDry" onclick="setEvent('dry')" title="Estiaje: alta conductividad, baja turbidez">☀ Estiaje</button>
+    <button class="norm-btn" id="evAlga" onclick="setEvent('alga')" title="Floración algal: color alto, pH alto">🌿 Algas</button>
+  </div>
+  <div class="hdiv"></div>
   <div class="simbar">
     <span class="simbar-lbl">Nombre de simulación:</span>
     <input type="text" id="simName" class="simbar-inp" placeholder="Ej: Prueba coagulación — Planta Norte" maxlength="100">
+  </div>
+</div>
+
+<!-- PDF MODAL -->
+<div class="modal-overlay hidden" id="pdfModal">
+  <div class="modal-box">
+    <div style="font-size:13px;font-weight:500;color:#fff;text-align:center;margin-bottom:2px">Informe PDF</div>
+    <div style="font-size:11px;color:var(--mt);text-align:center;margin-bottom:4px">¿Deseas compartir esta simulación?</div>
+
+    <button class="mopt" onclick="confirmReport(true)">
+      <div class="mopt-icon" style="background:rgba(0,200,83,.12)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="#00c853"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+      </div>
+      <div class="mopt-text">
+        <div class="mopt-title" style="color:var(--ok)">Guardar y descargar</div>
+        <div class="mopt-sub">Se guarda en la bitácora pública + descarga</div>
+      </div>
+    </button>
+
+    <button class="mopt" onclick="confirmReport(false)">
+      <div class="mopt-icon" style="background:rgba(64,196,255,.1)">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="#40c4ff"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+      </div>
+      <div class="mopt-text">
+        <div class="mopt-title">Solo descargar</div>
+        <div class="mopt-sub">Solo para ti, no se comparte</div>
+      </div>
+    </button>
+
+    <button class="mcancel" onclick="closeModal()">Cancelar</button>
   </div>
 </div>
 
@@ -297,6 +405,7 @@ table.rt{width:100%;border-collapse:collapse;font-size:11px;background:var(--sf)
   <div class="tab on" data-p="pCtrl">Parámetros</div>
   <div class="tab" data-p="pJars">Prueba de jarras</div>
   <div class="tab" data-p="pRes">Resultados y norma</div>
+  <div class="tab" data-p="pBit">Bitácora pública</div>
 </div>
 
 <div class="panel on" id="pCtrl">
@@ -325,7 +434,7 @@ table.rt{width:100%;border-collapse:collapse;font-size:11px;background:var(--sf)
     <div class="lbl">Corrección de pH</div>
     <select id="selPHA"><option value="none">Sin corrección de pH</option><option value="lime">Cal — Ca(OH)₂ (sube pH)</option><option value="naoh">Soda cáustica — NaOH (sube pH)</option><option value="h2so4">Ácido sulfúrico — H₂SO₄ (baja pH)</option><option value="hcl">Ácido clorhídrico — HCl (baja pH)</option></select>
     <div class="row"><div class="rl"><span>Dosis corrector pH</span><b id="vPHD">0 mg/L</b></div><input type="range" class="sl" id="slPHD" min="0" max="50" value="0"></div>
-    <div class="ib">pH resultante: <b id="vPHR">7.2</b>&nbsp;&nbsp;Óptimo: <b id="vOP">6.5–7.5</b><br>Consumo alcalinidad: <b id="vAC">—</b></div>
+    <div class="ib">pH resultante: <b id="vPHR">7.2</b>&nbsp;&nbsp;Óptimo: <b id="vOP">6.0–6.8</b><br>Consumo alcalinidad: <b id="vAC">—</b><br>Alcalinidad residual: <b id="vAR">—</b><br>Residual metal (<b id="vMN">Al</b>): <b id="vMR">—</b></div>
     <hr class="sep">
     <div class="lbl">Polímero / floculante</div>
     <select id="selPl"><option value="none">Sin polímero</option><option value="anionic">Poliacrilamida aniónica</option><option value="cationic">Poliacrilamida catiónica</option><option value="nonionic">Poliacrilamida no iónica</option><option value="starch">Almidón natural</option><option value="chitosan">Quitosano</option><option value="guar">Goma de guar</option></select>
@@ -350,7 +459,7 @@ table.rt{width:100%;border-collapse:collapse;font-size:11px;background:var(--sf)
     <select id="selDs"><option value="naclo">Hipoclorito de sodio NaClO</option><option value="cl2">Cloro gas Cl₂</option><option value="clo2">Dióxido de cloro ClO₂</option><option value="uv">Radiación UV</option><option value="ozone">Ozono O₃</option><option value="chloramine">Cloraminas NH₂Cl</option></select>
     <div class="row"><div class="rl"><span id="dLbl">Dosis (mg/L)</span><b id="vDD">2.0 mg/L</b></div><input type="range" class="sl" id="slDD" min="0.1" max="20" step="0.1" value="2"></div>
     <div class="row"><div class="rl"><span>Tiempo contacto</span><b id="vCT">30 min</b></div><input type="range" class="sl" id="slCT" min="5" max="120" value="30"></div>
-    <div class="ib">Valor CT: <b id="vCV">—</b><br>Req. Giardia: <b id="vCR">—</b><br>Cloro residual: <b id="vRS">—</b><br>Demanda cloro: <b id="vDem">—</b><br>Subproductos: <b id="vBP">THMs, HAAs</b></div>
+    <div class="ib">Valor CT: <b id="vCV">—</b><br>CT requerido (Giardia 3-log, pH/T reales): <b id="vCR">—</b><br>Cloro residual: <b id="vRS">—</b><br>Demanda cloro: <b id="vDem">—</b><br>THMs estimados: <b id="vTHM">—</b><br>Subproductos: <b id="vBP">THMs, HAAs</b></div>
     <div class="ib">Log inact. Giardia: <b id="vLG">—</b></div>
   </div>
 </div>
@@ -359,6 +468,31 @@ table.rt{width:100%;border-collapse:collapse;font-size:11px;background:var(--sf)
   <div class="jphases"><div class="jp on" id="jp0">① Mezcla rápida</div><div class="jp" id="jp1">② Floculación</div><div class="jp" id="jp2">③ Sedimentación</div><div class="jp" id="jp3">④ Lectura NTU</div></div>
   <canvas id="jarCv" height="210"></canvas>
   <div class="jctrls" id="jctrls"></div>
+  <div class="calib-box">
+    <div class="calib-hdr">
+      <div style="font-size:12px;font-weight:500;color:#fff">🧪 Calibración por jar test real</div>
+      <div style="font-size:10px;color:var(--mt)">Carga tus mediciones de laboratorio para ajustar el modelo a tu planta</div>
+    </div>
+    <div class="calib-row">
+      <label class="calib-btn">
+        📁 Cargar CSV
+        <input type="file" accept=".csv,text/csv" id="jarCSV" style="display:none" onchange="loadJarCSV(event)">
+      </label>
+      <button class="calib-btn" onclick="downloadJarTemplate()">📥 Plantilla CSV</button>
+      <button class="calib-btn" onclick="clearCalib()" id="clearCalibBtn" style="display:none">✕ Quitar calibración</button>
+      <span id="calibStatus" style="font-size:11px;color:var(--mt);margin-left:auto"></span>
+    </div>
+    <div id="calibTable" style="margin-top:6px"></div>
+  </div>
+</div>
+
+<div class="panel" id="pBit" style="display:none">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
+    <div style="font-size:13px;font-weight:500;color:#fff">Bitácora pública de simulaciones</div>
+    <div id="bitCount" style="font-size:11px;color:var(--mt)"></div>
+    <button onclick="exportBitCSV()" class="norm-btn on" style="margin-left:auto;cursor:pointer" title="Descargar toda la bitácora como CSV para análisis estadístico">📊 Exportar CSV</button>
+  </div>
+  <div id="bitList"></div>
 </div>
 
 <div class="panel" id="pRes" style="display:none">
@@ -380,9 +514,9 @@ table.rt{width:100%;border-collapse:collapse;font-size:11px;background:var(--sf)
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp · +1 608 448 9126
       </a>
-      <a class="cf-soc" href="mailto:teraserviciosprofesionales@outlook.com">
+      <a class="cf-soc" href="/cdn-cgi/l/email-protection#9de9f8effceef8efebf4fef4f2eeedeff2fbf8eef4f2f3fcf1f8eeddf2e8e9f1f2f2f6b3fef2f0">
         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        teraserviciosprofesionales@outlook.com
+        <span class="__cf_email__" data-cfemail="6e1a0b1c0f1d0b1c18070d07011d1e1c01080b1d0701000f020b1d2e011b1a02010105400d0103">[email&#160;protected]</span>
       </a>
       <a class="cf-soc" href="https://instagram.com/terah2o" target="_blank">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -421,7 +555,7 @@ table.rt{width:100%;border-collapse:collapse;font-size:11px;background:var(--sf)
 
 </div><!-- end #app -->
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script>
 /* ── SPLASH ── */
 function enterApp(){
   document.getElementById('splash').classList.add('hidden');
@@ -429,31 +563,167 @@ function enterApp(){
 }
 document.body.style.overflow='hidden';
 
-/* ── NORMS ── */
-const NORMS={
-  ec:{id:'ec',flag:'🇪🇨',name:'Ecuador',ref:'NTE INEN 1108:2020 / TULSMA',turb:1,turbWarn:5,color:15,pHmin:6.5,pHmax:8.5,clResMin:.3,clResMax:1.5,label:'Apta — NTE INEN 1108',labelWarn:'Aceptable — revisar',labelFail:'No apta — incumple INEN 1108'},
-  co:{id:'co',flag:'🇨🇴',name:'Colombia',ref:'Resolución 2115 de 2007',turb:2,turbWarn:4,color:15,pHmin:6.5,pHmax:9.0,clResMin:.2,clResMax:1.0,label:'Apta — Res. 2115/2007',labelWarn:'Aceptable — revisar',labelFail:'No apta — incumple Res. 2115'},
-  pe:{id:'pe',flag:'🇵🇪',name:'Perú',ref:'DS 031-2010-SA — MINSA',turb:5,turbWarn:5,color:15,pHmin:6.5,pHmax:8.5,clResMin:.5,clResMax:5.0,label:'Apta — DS 031-2010-SA',labelWarn:'Aceptable — revisar',labelFail:'No apta — incumple DS 031'}
-};
-let activeNorm='ec';
-function setNorm(n){activeNorm=n;document.querySelectorAll('.norm-btn').forEach(b=>b.classList.remove('on'));document.getElementById({ec:'nEc',co:'nCo',pe:'nPe'}[n]).classList.add('on');update();}
-function getNorm(){return NORMS[activeNorm];}
-function evalWater(t,res){
-  const nm=getNorm();
-  const turbOk=t.turb<=nm.turb,turbWarn=t.turb<=nm.turbWarn,colorOk=t.color<=nm.color,pHOk=t.pH>=nm.pHmin&&t.pH<=nm.pHmax,clOk=res>=nm.clResMin&&res<=nm.clResMax;
-  return{turbOk,turbWarn,colorOk,pHOk,clOk,allOk:turbOk&&colorOk&&pHOk&&clOk,partOk:turbWarn&&colorOk&&pHOk};
+/* ── DATA TYPE ── */
+let dataType='real';
+function setDataType(t){
+  dataType=t;
+  document.getElementById('dtReal').className='dtype-btn real'+(t==='real'?' on':'');
+  document.getElementById('dtEmp').className='dtype-btn emp'+(t==='empirico'?' on':'');
+  // Update normbar visual indicator
+  const bar=document.getElementById('dtypeBar');
+  if(bar){bar.style.background=t==='real'?'rgba(0,200,83,.08)':'rgba(255,145,0,.08)';bar.style.borderColor=t==='real'?'rgba(0,200,83,.2)':'rgba(255,145,0,.2)';}
 }
 
-/* ── DATA ── */
-const CP={alum:{te:.87,ce:.72,op:7.0,pr:1.5,ak:.50,opt:'6.5–7.5'},pac:{te:.92,ce:.83,op:7.5,pr:2.5,ak:.30,opt:'6.0–8.0'},fecl3:{te:.89,ce:.78,op:6.0,pr:2.0,ak:.60,opt:'5.5–7.0'},feso4:{te:.83,ce:.65,op:8.5,pr:1.5,ak:.40,opt:'7.5–9.0'},alum_k:{te:.85,ce:.70,op:7.0,pr:1.5,ak:.50,opt:'6.5–7.5'},alcl3:{te:.86,ce:.71,op:6.8,pr:1.5,ak:.45,opt:'6.0–7.5'}};
+function openReport(){document.getElementById('pdfModal').classList.remove('hidden');}
+function closeModal(){document.getElementById('pdfModal').classList.add('hidden');}
+function confirmReport(makePublic){
+  closeModal();
+  if(makePublic&&typeof saveToBitacora==='function')try{saveToBitacora();}catch(e){}
+  generateReport(makePublic);
+}
+
+/* ── BITÁCORA (persistent storage) ── */
+async function saveToBitacora(){
+  const ss=simR.stages;if(!ss||!ss.length)return;
+  const fin=ss[ss.length-1],nm=getNorm(),ev=evalWater(fin,simR.residual);
+  const entry={
+    id:'sim_'+Date.now(),
+    ts:new Date().toISOString(),
+    name:document.getElementById('simName').value||'Simulación sin nombre',
+    dataType,
+    norm:nm.name,
+    normFlag:nm.flag,
+    Q:S.Q,
+    rawTurb:S.raw.turb,rawColor:S.raw.color,rawPH:S.raw.pH.toFixed(1),rawTemp:S.raw.temp,rawAlk:S.raw.alk,
+    coag:S.coag.type,coagDose:S.coag.dose,
+    poly:S.poly.type,
+    sed:S.sed.type,filt:S.filt.type,
+    dis:S.dis.type,disDose:S.dis.dose,
+    finalTurb:fin.turb.toFixed(2),finalColor:simR.treatedColor.toFixed(1),finalPH:fin.pH.toFixed(2),
+    residual:simR.residual.toFixed(2),
+    apta:ev.allOk,warn:ev.partOk,
+    label:ev.allOk?nm.label:ev.partOk?nm.labelWarn:nm.labelFail
+  };
+  try{
+    await window.storage.set('bit:'+entry.id,JSON.stringify(entry),true);
+    loadBitacora();
+  }catch(e){console.error('Bitácora error:',e);}
+}
+
+async function loadBitacora(){
+  const listEl=document.getElementById('bitList');
+  const countEl=document.getElementById('bitCount');
+  if(!listEl)return;
+  try{
+    const keys=await window.storage.list('bit:',true);
+    const all=keys&&keys.keys?keys.keys:[];
+    if(countEl)countEl.textContent=all.length+' simulaci'+(all.length===1?'ón':'ones')+' compartidas';
+    if(!all.length){
+      listEl.innerHTML=`<div class="bit-empty"><div class="bit-empty-icon">💧</div>Aún no hay simulaciones compartidas.<br><span style="font-size:11px">Genera un informe PDF y marca la opción de compartir para ser el primero.</span></div>`;
+      return;
+    }
+    const entries=await Promise.all(all.map(async k=>{
+      try{const r=await window.storage.get(k,true);return r?JSON.parse(r.value):null;}catch{return null;}
+    }));
+    const valid=entries.filter(Boolean).sort((a,b)=>new Date(b.ts)-new Date(a.ts));
+    const COAG_SHORT={alum:'Al₂(SO₄)₃',pac:'PAC',fecl3:'FeCl₃',feso4:'FeSO₄',alum_k:'Alumbre',alcl3:'AlCl₃'};
+    const DIS_SHORT={naclo:'NaClO',cl2:'Cl₂',clo2:'ClO₂',uv:'UV',ozone:'O₃',chloramine:'NH₂Cl'};
+    listEl.innerHTML=valid.map(e=>{
+      const d=new Date(e.ts);
+      const ds=d.toLocaleDateString('es-ES')+' '+d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+      const tc=e.apta?'var(--ok)':e.warn?'var(--wn)':'var(--er)';
+      const statusCls=e.apta?'sok':e.warn?'swn':'sbd';
+      return`<div class="bit-entry">
+        <div class="bit-hdr">
+          <div class="bit-name">${e.normFlag} ${e.name}</div>
+          <span class="bit-badge ${e.dataType==='real'?'bit-real':'bit-emp'}">${e.dataType==='real'?'Planta Real':'Datos Empíricos'}</span>
+          <div class="bit-date">${ds}</div>
+        </div>
+        <div class="bit-params">
+          <div class="bit-param"><b>${e.Q} L/s</b>Caudal</div>
+          <div class="bit-param"><b>${e.rawTurb} NTU</b>Turb. cruda</div>
+          <div class="bit-param"><b>${e.rawColor} UPC</b>Color crudo</div>
+          <div class="bit-param"><b>${e.rawPH}</b>pH crudo</div>
+          <div class="bit-param"><b>${COAG_SHORT[e.coag]||e.coag} ${e.coagDose}mg/L</b>Coagulante</div>
+          <div class="bit-param"><b>${DIS_SHORT[e.dis]||e.dis} ${e.disDose}</b>Desinfección</div>
+          <div class="bit-param"><b style="color:${tc}">${e.finalTurb} NTU</b>Turb. tratada</div>
+          <div class="bit-param"><b style="color:${tc}">${e.finalColor} UPC</b>Color tratado</div>
+        </div>
+        <div class="bit-result">
+          <span class="${statusCls}">${e.label}</span>
+          <span style="font-size:10px;color:var(--mt)">Norma: ${e.norm} · pH tratado: ${e.finalPH} · Cl residual: ${e.residual} mg/L</span>
+        </div>
+      </div>`;
+    }).join('');
+  }catch(e){
+    if(listEl)listEl.innerHTML=`<div class="bit-empty"><div class="bit-empty-icon">💧</div>Cargando bitácora...</div>`;
+  }
+}
+
+/* ── NORMS ── */
+const NORMS={
+  ec:{id:'ec',flag:'🇪🇨',name:'Ecuador',ref:'NTE INEN 1108:2020 / TULSMA',turb:1,turbWarn:5,color:15,pHmin:6.5,pHmax:8.5,clResMin:.3,clResMax:1.5,alMax:.2,feMax:.3,thmMax:100,label:'Apta — NTE INEN 1108',labelWarn:'Aceptable — revisar',labelFail:'No apta — incumple INEN 1108'},
+  co:{id:'co',flag:'🇨🇴',name:'Colombia',ref:'Resolución 2115 de 2007',turb:2,turbWarn:4,color:15,pHmin:6.5,pHmax:9.0,clResMin:.2,clResMax:1.0,alMax:.2,feMax:.3,thmMax:200,label:'Apta — Res. 2115/2007',labelWarn:'Aceptable — revisar',labelFail:'No apta — incumple Res. 2115'},
+  pe:{id:'pe',flag:'🇵🇪',name:'Perú',ref:'DS 031-2010-SA — MINSA',turb:5,turbWarn:5,color:15,pHmin:6.5,pHmax:8.5,clResMin:.5,clResMax:5.0,alMax:.2,feMax:.3,thmMax:100,label:'Apta — DS 031-2010-SA',labelWarn:'Aceptable — revisar',labelFail:'No apta — incumple DS 031'}
+};
+let activeNorm='ec';
+let calibData=null; // {rows:[{dose,turbFinal,pH,color?}], optimalDose, efficiency}
+const EVENTS={
+  normal:{turb:150,color:80,pH:72,alk:120,temp:20},
+  rain:{turb:800,color:250,pH:65,alk:40,temp:15},
+  cold:{turb:300,color:120,pH:68,alk:60,temp:6},
+  dry:{turb:40,color:30,pH:80,alk:250,temp:26},
+  alga:{turb:80,color:200,pH:88,alk:150,temp:24}
+};
+function setEvent(ev){
+  const e=EVENTS[ev];if(!e)return;
+  document.getElementById('slTb').value=e.turb;
+  document.getElementById('slCl').value=e.color;
+  document.getElementById('slPH').value=e.pH;
+  document.getElementById('slAl').value=e.alk;
+  document.getElementById('slTp').value=e.temp;
+  document.querySelectorAll('#evNorm,#evRain,#evCold,#evDry,#evAlga').forEach(b=>b.classList.remove('on'));
+  document.getElementById({normal:'evNorm',rain:'evRain',cold:'evCold',dry:'evDry',alga:'evAlga'}[ev]).classList.add('on');
+  update();
+}
+function setNorm(n){activeNorm=n;document.querySelectorAll('.norm-btn').forEach(b=>{if(b.id.startsWith('n')&&b.id.length===3)b.classList.remove('on');});document.getElementById({ec:'nEc',co:'nCo',pe:'nPe'}[n]).classList.add('on');update();}
+function getNorm(){return NORMS[activeNorm];}
+function evalWater(t,res,extra){
+  const nm=getNorm();
+  const turbOk=t.turb<=nm.turb,turbWarn=t.turb<=nm.turbWarn,colorOk=t.color<=nm.color,pHOk=t.pH>=nm.pHmin&&t.pH<=nm.pHmax,clOk=res>=nm.clResMin&&res<=nm.clResMax;
+  let metalOk=true,thmOk=true;
+  if(extra){
+    const c=CP[S.coag.type];
+    metalOk = c.mRes==='Al' ? extra.metalRes<=nm.alMax : extra.metalRes<=nm.feMax;
+    thmOk = !extra.thms || extra.thms<=nm.thmMax;
+  }
+  return{turbOk,turbWarn,colorOk,pHOk,clOk,metalOk,thmOk,
+    allOk:turbOk&&colorOk&&pHOk&&clOk&&metalOk&&thmOk,
+    partOk:turbWarn&&colorOk&&pHOk};
+}
+
+/* ── DATA ──
+  Coagulantes: te=efic. turbidez, op=pH óptimo (mínima solubilidad del hidróxido),
+  pr=rango pH (±), ak=consumo estequiométrico de alcalinidad (mg CaCO₃/mg coagulante),
+  me=metal residual potencial (Al o Fe, mg/mg coag), mw=PM para cálculo lodos.
+  Referencias: Arboleda Valencia; AWWA Water Quality & Treatment 6ed; CEPIS */
+const CP={
+  alum:  {te:.87,ce:.72,op:6.3,pr:1.5,ak:.50,me:.091,mRes:'Al',opt:'6.0–6.8',name:'Al₂(SO₄)₃'},
+  pac:   {te:.92,ce:.83,op:7.0,pr:2.0,ak:.30,me:.120,mRes:'Al',opt:'6.5–8.0',name:'PAC'},
+  fecl3: {te:.89,ce:.78,op:5.8,pr:2.5,ak:.92,me:.345,mRes:'Fe',opt:'5.0–8.5',name:'FeCl₃'},
+  feso4: {te:.83,ce:.65,op:8.8,pr:1.0,ak:.70,me:.200,mRes:'Fe',opt:'8.5–10.0',name:'FeSO₄'},
+  alum_k:{te:.85,ce:.70,op:6.3,pr:1.5,ak:.50,me:.057,mRes:'Al',opt:'6.0–6.8',name:'Alumbre K'},
+  alcl3: {te:.86,ce:.71,op:6.5,pr:1.8,ak:.45,me:.200,mRes:'Al',opt:'6.0–7.5',name:'AlCl₃'}
+};
 const PP={none:{sb:0,cb:0},anionic:{sb:.15,cb:.10},cationic:{sb:.12,cb:.08},nonionic:{sb:.10,cb:.06},starch:{sb:.08,cb:.05},chitosan:{sb:.12,cb:.09},guar:{sb:.07,cb:.04}};
 const DP={naclo:{ctG:65,ctC:.08,unit:'mg/L',bp:'THMs, HAAs'},cl2:{ctG:65,ctC:.08,unit:'mg/L',bp:'THMs, HAAs'},clo2:{ctG:8,ctC:.04,unit:'mg/L',bp:'Cloritos'},uv:{ctG:10,ctC:1.5,unit:'mJ/cm²',bp:'Ninguno'},ozone:{ctG:.5,ctC:.02,unit:'mg/L',bp:'Bromates'},chloramine:{ctG:1100,ctC:95,unit:'mg/L',bp:'N-DBPs'}};
 const SP={conv:{eb:1.0},lamella:{eb:1.65},upflow:{eb:1.25},circular:{eb:1.12}};
 const FP={sand:{ft:.5,cr:.10},dual:{ft:.3,cr:.15},tri:{ft:.15,cr:.20},membrane:{ft:.02,cr:.40}};
 const PHP={none:0,lime:.09,naoh:.14,h2so4:-.11,hcl:-.09};
 const CC_BASE={alum:.90,pac:.93,fecl3:.95,feso4:.85,alum_k:.89,alcl3:.87};
-const CC_PH={alum:6.3,pac:6.8,fecl3:5.8,feso4:8.0,alum_k:6.3,alcl3:6.3};
-const COAG_N={alum:'Sulfato de aluminio Al₂(SO₄)₃',pac:'PAC — Policloruro de aluminio',fecl3:'Cloruro férrico FeCl₃',feso4:'Sulfato ferroso FeSO₄',alum_k:'Alumbre KAl(SO₄)₂·12H₂O',alcl3:'Cloruro de aluminio AlCl₃'};
+/* CC_PH: pH de MÍNIMA SOLUBILIDAD del hidróxido metálico (valores AWWA/Arboleda) */
+const CC_PH={alum:6.3,pac:7.0,fecl3:5.5,feso4:8.8,alum_k:6.3,alcl3:6.5};
+const COAG_N={alum:'Sulfato de aluminio Al₂(SO₄)₃·14H₂O',pac:'PAC — Policloruro de aluminio',fecl3:'Cloruro férrico FeCl₃',feso4:'Sulfato ferroso FeSO₄·7H₂O',alum_k:'Alumbre KAl(SO₄)₂·12H₂O',alcl3:'Cloruro de aluminio AlCl₃'};
 const PHN={none:'Sin corrección',lime:'Cal — Ca(OH)₂',naoh:'Soda cáustica NaOH',h2so4:'H₂SO₄',hcl:'HCl'};
 const POLN={none:'Sin polímero',anionic:'Poliacrilamida aniónica',cationic:'Poliacrilamida catiónica',nonionic:'No iónica',starch:'Almidón natural',chitosan:'Quitosano',guar:'Goma de guar'};
 const SEDN={conv:'Convencional',lamella:'Placas inclinadas',upflow:'Flujo ascendente',circular:'Clarificador circ.'};
@@ -468,23 +738,174 @@ let tick=0;
 function computePH(rp,prod,dose,alk){if(!prod||prod==='none'||!dose)return rp;return Math.max(4.5,Math.min(10.5,rp+PHP[prod]*dose/Math.max(.5,alk/100)));}
 function chlorineDemand(t,c,temp){return Math.min(S.dis.dose*.85,(0.12+c/180+t/90)*(1+((temp-20)*.018)));}
 
+/* ── NUEVAS FUNCIONES TÉCNICAS (v2 — PhD upgrade) ── */
+
+// Viscosidad dinámica del agua (Pa·s) como f(T°C) — correlación Vogel
+function viscosity(T){return 2.414e-5*Math.pow(10,247.8/((T+273.15)-140));}
+
+// Densidad del agua (kg/m³) aproximada
+function density(T){return 1000*(1-(T+288.9414)/(508929.2*(T+68.12963))*Math.pow(T-3.9863,2));}
+
+// Gradiente de velocidad G (s⁻¹) — Camp-Stein: G = √(P/(μ·V))
+// Para mezcla rápida hidráulica con tr=40s y mezclador mecánico típico
+function gradientG(Q_m3s, volume_m3, power_W, T){
+  const mu=viscosity(T);
+  return Math.sqrt(power_W/(mu*Math.max(0.1,volume_m3)));
+}
+
+// Consumo de alcalinidad y alcalinidad residual
+function alkalinityBalance(coagType, dose, rawAlk){
+  const c=CP[coagType];
+  const consumed = c.ak * dose; // mg/L CaCO₃
+  const residual = rawAlk - consumed;
+  return {consumed, residual, adequate: residual >= 15};
+}
+
+// Metal residual (Al o Fe) en función de pH, dosis y T
+// Modelo: mínimo en pH óptimo, crece exponencialmente al alejarse
+function metalResidual(coagType, pHfinal, dose, T){
+  const c=CP[coagType];
+  const pHopt=CC_PH[coagType];
+  const dev=Math.abs(pHfinal-pHopt);
+  // Solubilidad mínima típica: Al 0.05 mg/L a pH 6.3; Fe 0.05 mg/L a pH 5.5
+  // Crece ~10x por cada unidad de pH fuera del óptimo
+  const minSol = c.mRes==='Al' ? 0.05 : 0.05;
+  const solubility = minSol * Math.pow(10, dev*0.6);
+  // Fracción no precipitada dependiente de dosis (sobre-dosis = más residual)
+  const excessFactor = dose>40 ? 1+(dose-40)/100 : 1;
+  // Temperatura: frío reduce precipitación
+  const Tfactor = T<15 ? 1+(15-T)/40 : 1;
+  return solubility * excessFactor * Tfactor;
+}
+
+// CT USEPA real para 3-log Giardia con cloro libre (interpolación tabla)
+// Tabla EPA SWTR (mg·min/L)
+const CT_TABLE_GIARDIA={
+  // [T°C]: {pH: CT}
+  1:  {6:165, 7:236, 8:346, 9:500},
+  5:  {6:116, 7:165, 8:243, 9:353},
+  10: {6: 87, 7:124, 8:182, 9:265},
+  15: {6: 58, 7: 83, 8:122, 9:177},
+  20: {6: 44, 7: 62, 8: 91, 9:132},
+  25: {6: 29, 7: 41, 8: 61, 9: 88}
+};
+function ctRequiredGiardia(pH, T){
+  // Interpolación bilineal
+  const Ts=[1,5,10,15,20,25];
+  const pHs=[6,7,8,9];
+  const T_=Math.max(1,Math.min(25,T));
+  const pH_=Math.max(6,Math.min(9,pH));
+  let T1=Ts[0],T2=Ts[Ts.length-1];
+  for(let i=0;i<Ts.length-1;i++) if(T_>=Ts[i]&&T_<=Ts[i+1]){T1=Ts[i];T2=Ts[i+1];break;}
+  let p1=pHs[0],p2=pHs[pHs.length-1];
+  for(let i=0;i<pHs.length-1;i++) if(pH_>=pHs[i]&&pH_<=pHs[i+1]){p1=pHs[i];p2=pHs[i+1];break;}
+  const ct11=CT_TABLE_GIARDIA[T1][p1], ct12=CT_TABLE_GIARDIA[T1][p2];
+  const ct21=CT_TABLE_GIARDIA[T2][p1], ct22=CT_TABLE_GIARDIA[T2][p2];
+  const fT=(T_-T1)/Math.max(0.001,(T2-T1));
+  const fP=(pH_-p1)/Math.max(0.001,(p2-p1));
+  const ctT1=ct11+(ct12-ct11)*fP;
+  const ctT2=ct21+(ct22-ct21)*fP;
+  return ctT1+(ctT2-ctT1)*fT;
+}
+
+// THMs totales (μg/L) — modelo empírico Amy et al. simplificado
+// TOC aproximado a partir de color (relación típica TOC ≈ Color/5 mg/L)
+function estimateTHMs(colorRaw, clDose, pH, T, contactTimeMin){
+  const TOC = colorRaw/5; // mg/L
+  const t_h = contactTimeMin/60; // horas
+  // Fórmula simplificada (sin bromuro):
+  // THM ≈ 0.0412 · TOC^1.098 · Cl^0.152 · (pH-2.6)^1.601 · T^0.258 · t^0.260
+  const thm = 0.0412 * Math.pow(Math.max(0.1,TOC),1.098)
+              * Math.pow(Math.max(0.1,clDose),0.152)
+              * Math.pow(Math.max(0.1,pH-2.6),1.601)
+              * Math.pow(Math.max(1,T),0.258)
+              * Math.pow(Math.max(0.1,t_h),0.260) * 40; // factor de ajuste
+  return thm; // μg/L
+}
+
+// Índice de Langelier (LSI) — corrosividad/incrustación
+function langelierLSI(pH, T, TDS, Ca_mgL, alk_mgL_CaCO3){
+  // A=f(TDS), B=f(T), C=f(Ca), D=f(alk)
+  const A = (Math.log10(Math.max(50,TDS))-1)/10;
+  const B = -13.12*Math.log10(T+273.15) + 34.55;
+  const C = Math.log10(Math.max(1,Ca_mgL)) - 0.4;
+  const D = Math.log10(Math.max(1,alk_mgL_CaCO3));
+  const pHs = (9.3 + A + B) - (C + D);
+  return pH - pHs;
+}
+
+// Generación de lodos (kg/día materia seca)
+// Lodo ≈ (SS_crudo + k·dosis_coag + color_removido) · Q
+function sludgeGeneration(turbRaw, colorRemoved, coagType, coagDose, Q_Ls){
+  const c=CP[coagType];
+  // SS crudos ≈ 1.3·turbidez (correlación empírica)
+  const SS_mgL = 1.3 * turbRaw;
+  // Lodos del coagulante: mg/L de hidróxido formado
+  // Al(OH)₃: 1 mg Al₂(SO₄)₃ → 0.234 mg Al(OH)₃
+  // Fe(OH)₃: 1 mg FeCl₃ → 0.659 mg Fe(OH)₃
+  const hydrFactor = c.mRes==='Al' ? 0.234 : 0.659;
+  const lodoCoag_mgL = coagDose * hydrFactor;
+  // Color removido contribuye ~0.5 mg/L sólidos por UPC
+  const lodoColor_mgL = colorRemoved * 0.5;
+  const total_mgL = SS_mgL + lodoCoag_mgL + lodoColor_mgL;
+  const kgPerDay = total_mgL * Q_Ls * 86.4 / 1000;
+  return {total_mgL, kgPerDay, SS_mgL, lodoCoag_mgL, lodoColor_mgL};
+}
+
+// Consumos diarios de insumos (kg/día)
+function dailyConsumption(Q_Ls){
+  const kg=dose=>dose*Q_Ls*86.4/1000;
+  return {
+    coag: kg(S.coag.dose),
+    phCorr: kg(S.coag.phDose),
+    poly: kg(S.poly.dose),
+    disinf: S.dis.type==='uv'?0:kg(S.dis.dose)
+  };
+}
+
+// Costos operativos estimados USD/m³ (precios LATAM 2024 aprox)
+const COAG_COST_USD_KG={alum:0.45,pac:1.20,fecl3:0.85,feso4:0.35,alum_k:0.60,alcl3:1.50};
+const PH_COST_USD_KG={none:0,lime:0.15,naoh:0.90,h2so4:0.35,hcl:0.40};
+const POLY_COST_USD_KG={none:0,anionic:4.5,cationic:5.0,nonionic:4.0,starch:1.5,chitosan:15,guar:3.5};
+const DIS_COST_USD_KG={naclo:0.55,cl2:1.20,clo2:3.5,uv:0,ozone:0,chloramine:1.0};
+function costPerM3(cons){
+  const coag=(cons.coag*(COAG_COST_USD_KG[S.coag.type]||0.5));
+  const ph=(cons.phCorr*(PH_COST_USD_KG[S.coag.phProduct]||0));
+  const poly=(cons.poly*(POLY_COST_USD_KG[S.poly.type]||0));
+  const dis=(cons.disinf*(DIS_COST_USD_KG[S.dis.type]||0.5));
+  const total_day=coag+ph+poly+dis;
+  const m3_day=S.Q*86.4;
+  return {coag,ph,poly,dis,total_day,per_m3:total_day/Math.max(1,m3_day)};
+}
+
 function runSim(){
   const r=S.raw,c=CP[S.coag.type],p=PP[S.poly.type],d=DP[S.dis.type],sp=SP[S.sed.type],fp=FP[S.filt.type];
   const wPH=computePH(r.pH,S.coag.phProduct,S.coag.phDose,r.alk);
+  // pH óptimo de remoción TURBIDEZ vs pH de mínima solubilidad (metal residual)
   const phF=Math.max(.15,1-Math.abs(wPH-c.op)/c.pr);
-  const dF=S.coag.dose<=40?Math.min(1,S.coag.dose/40):Math.max(.8,1-(S.coag.dose-40)/200);
-  const tF=Math.max(.6,.6+(r.temp-5)/75),aF=r.alk<50?.65:r.alk<80?.82:1;
+  // Curva dosis tipo campana: subdosis, óptimo, sobredosis (restabilización)
+  const dF=S.coag.dose<=30?Math.min(1,S.coag.dose/30)
+         :S.coag.dose<=60?1-(S.coag.dose-30)/300
+         :Math.max(.60,.90-(S.coag.dose-60)/250);
+  // Temperatura via viscosidad (afecta más que lineal)
+  const mu20=viscosity(20),muT=viscosity(r.temp);
+  const tF=Math.max(.55,Math.min(1.05,mu20/muT));
+  // Alcalinidad: necesita >15 mg/L residual para coagular bien
+  const alkBal=alkalinityBalance(S.coag.type,S.coag.dose,r.alk);
+  const aF=alkBal.residual<5?.40:alkBal.residual<15?.65:alkBal.residual<30?.85:1;
   const cE=Math.min(.97,c.te*phF*dF*tF*aF);
+  // Calibración por jar test real: multiplica eficiencia por factor según curva cargada
+  const cE_cal=calibData&&calibData.factor?Math.min(.97,cE*calibData.factor):cE;
   const phDevC=Math.abs(wPH-CC_PH[S.coag.type]);
   const phFC=Math.max(.55,1-phDevC/4.5);
   const doseFClr=S.coag.dose<10?S.coag.dose/10*.7:Math.min(1,.7+(S.coag.dose-10)/35*.30);
   const clrRemCoag=Math.min(.95,CC_BASE[S.coag.type]*phFC*doseFClr*Math.max(.75,.75+(r.temp-5)/45));
   const ss=[];
   ss.push({name:'Agua cruda',turb:r.turb,color:r.color,pH:r.pH,residual:0});
-  ss.push({name:'Mezcla rápida',turb:r.turb*(1-cE*.65),color:Math.max(2,r.color*(1-clrRemCoag)),pH:wPH,residual:0});
+  ss.push({name:'Mezcla rápida',turb:r.turb*(1-cE_cal*.65),color:Math.max(2,r.color*(1-clrRemCoag)),pH:wPH,residual:0});
   ss.push({name:'Floculación',turb:ss[1].turb*.86,color:Math.max(2,ss[1].color*(1-Math.min(.15,clrRemCoag*.14))),pH:wPH,residual:0});
   const ofr=(S.Q*3.6)/S.sed.area;
-  const sedEff=Math.min(.97,Math.max(.1,sp.eb*(1+p.sb)*(1-ofr/7)*cE));
+  const sedEff=Math.min(.97,Math.max(.1,sp.eb*(1+p.sb)*(1-ofr/7)*cE_cal));
   ss.push({name:'Sedimentación',turb:Math.max(.5,ss[2].turb*(1-sedEff)),color:Math.max(1.5,ss[2].color*(1-Math.min(.85,sedEff*.82+p.cb))),pH:wPH,residual:0});
   const frF=Math.max(.45,1-(S.filt.rate-120)/400);
   const t4=Math.max(fp.ft,ss[3].turb*.06*frF);
@@ -495,7 +916,31 @@ function runSim(){
   else{demand=chlorineDemand(t4,c5,r.temp);residual=Math.max(0,S.dis.dose-demand);ctVal=residual*S.dis.ct;}
   const treatedColor=Math.max(1,c5);
   ss.push({name:'Desinfección',turb:t4,color:treatedColor,pH:wPH,residual});
-  return{stages:ss,ctVal,ofr,sedEff,demand,residual,treatedColor};
+  // ── CÁLCULOS EXTENDIDOS (v2 PhD) ──
+  const ctReqReal = (S.dis.type==='naclo'||S.dis.type==='cl2')
+    ? ctRequiredGiardia(wPH, r.temp) : DP[S.dis.type].ctG;
+  const metalRes = metalResidual(S.coag.type, wPH, S.coag.dose, r.temp);
+  const thms = (S.dis.type==='naclo'||S.dis.type==='cl2')
+    ? estimateTHMs(r.color, S.dis.dose, wPH, r.temp, S.dis.ct) : 0;
+  // LSI: asumimos Ca≈0.4·alk, TDS≈2·alk como aproximación si no se ingresan
+  const Ca_approx = r.alk * 0.4;
+  const TDS_approx = r.alk * 2.5;
+  const lsi = langelierLSI(wPH, r.temp, TDS_approx, Ca_approx, r.alk);
+  const colorRemoved = r.color - treatedColor;
+  const sludge = sludgeGeneration(r.turb, colorRemoved, S.coag.type, S.coag.dose, S.Q);
+  const consumption = dailyConsumption(S.Q);
+  const cost = costPerM3(consumption);
+  // G teórico mezcla rápida: asumimos V=Q·40s, P=0.8 W/m³·V típico
+  const V_rapid = S.Q/1000 * 40; // m³ (tr=40s)
+  const P_rapid = V_rapid * 800; // W (gradiente alto)
+  const G_rapid = gradientG(S.Q/1000, V_rapid, P_rapid, r.temp);
+  const V_floc = S.Q/1000 * 1200; // tr=20min
+  const P_floc = V_floc * 5; // W (gradiente bajo)
+  const G_floc = gradientG(S.Q/1000, V_floc, P_floc, r.temp);
+  const Gt_floc = G_floc * 1200; // Camp number
+  return{stages:ss,ctVal,ctReqReal,ofr,sedEff,demand,residual,treatedColor,
+    metalRes, thms, lsi, sludge, consumption, cost,
+    alkBal, G_rapid, G_floc, Gt_floc, wPH};
 }
 
 function jarTurbFull(jar){
@@ -519,16 +964,11 @@ function getLayout(W,H){const PL=16,PT=115,gY=H-32,gap=10,twR=UDEFS.reduce((s,d)
 
 function drawPlant(){
   const W=cv.width,H=cv.height;ctx.clearRect(0,0,W,H);
-  const bg=ctx.createLinearGradient(0,0,0,H);bg.addColorStop(0,'#030c1c');bg.addColorStop(1,'#050e20');ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='rgba(30,80,180,.06)';ctx.lineWidth=1;
-  for(let x=0;x<W;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
-  for(let y=0;y<H;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  ctx.fillStyle='#050e20';ctx.fillRect(0,0,W,H);
   const ss=simR.stages;if(!ss||ss.length<6)return;
   const raw=ss[0],lay=getLayout(W,H),gY=H-32;
   ctx.fillStyle='#07111f';ctx.fillRect(0,gY,W,H-gY);
   ctx.strokeStyle='rgba(40,100,200,.2)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,gY);ctx.lineTo(W,gY);ctx.stroke();
-  ctx.strokeStyle='rgba(30,80,150,.09)';ctx.lineWidth=.8;
-  for(let x=-H;x<W+H;x+=16){ctx.beginPath();ctx.moveTo(x,gY);ctx.lineTo(x+H,gY+H);ctx.stroke();}
   const T=[raw.turb,ss[1]?ss[1].turb:raw.turb,ss[2]?ss[2].turb:raw.turb,ss[3]?ss[3].turb:raw.turb,ss[4]?ss[4].turb:raw.turb,ss[5]?ss[5].turb:raw.turb,ss[5]?ss[5].turb:raw.turb];
   const speed=Math.max(.004,Math.min(.035,S.Q/1400)),pH=11;
   for(let i=0;i<lay.length-1;i++){
@@ -571,10 +1011,31 @@ function drawPlant(){
     const tv=T[i],tc=tv<=1?'#00c853':tv<=5?'#ffab40':tv<=50?'#ff9100':'#ff1744';
     ctx.font=`500 ${Math.max(9,Math.min(11,w*.115))}px 'Segoe UI'`;ctx.fillStyle=tc;ctx.fillText((tv<.1?tv.toFixed(2):tv<1?tv.toFixed(2):tv.toFixed(1))+' NTU',lx,y+h+14);
     const pct=Math.max(0,1-T[i]/Math.max(1,raw.turb));ctx.fillStyle='rgba(30,80,180,.14)';ctx.fillRect(x,y+h+19,w,3);ctx.fillStyle=id==='out'?'#00c853':UCOL[ci];ctx.fillRect(x,y+h+19,w*pct,3);
+    // Sample Point (SP) P&ID marker
+    const spN=i+1,spX=x+w-10,spY=y+h-10;
+    ctx.beginPath();ctx.arc(spX,spY,8,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+    ctx.strokeStyle='#0a1a30';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.font='700 9px Segoe UI';ctx.fillStyle='#0a1a30';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('SP'+spN,spX,spY+.5);ctx.textBaseline='alphabetic';
+    // Valve symbol (bowtie) at inlet of each unit (except intake)
+    if(id!=='intake'){
+      const vx=x-4,vy=y+h*.5;
+      ctx.beginPath();ctx.moveTo(vx-5,vy-5);ctx.lineTo(vx+5,vy+5);ctx.lineTo(vx+5,vy-5);ctx.lineTo(vx-5,vy+5);ctx.closePath();
+      ctx.fillStyle='rgba(200,220,255,.7)';ctx.fill();ctx.strokeStyle='#0a1a30';ctx.lineWidth=1;ctx.stroke();
+    }
   });
   ctx.textAlign='left';ctx.font='400 11px Segoe UI';ctx.fillStyle='rgba(150,200,240,.28)';
   const sn=document.getElementById('simName').value,nm=getNorm();
   ctx.fillText((sn?`"${sn}"  |  `:``)+'Q = '+S.Q+' L/s  →  '+(S.Q*3.6).toFixed(0)+' m³/h  |  Norma: '+nm.flag+' '+nm.name,16,14);
+  // P&ID Legend (bottom-right)
+  const lW=172,lH=40,lX=cv.width-lW-12,lY=cv.height-lH-8;
+  ctx.fillStyle='rgba(7,20,40,.8)';ctx.fillRect(lX,lY,lW,lH);
+  ctx.strokeStyle='rgba(100,160,210,.3)';ctx.lineWidth=1;ctx.strokeRect(lX,lY,lW,lH);
+  ctx.beginPath();ctx.arc(lX+12,lY+13,6,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle='#0a1a30';ctx.stroke();
+  ctx.textBaseline='middle';ctx.textAlign='left';ctx.font='400 10px Segoe UI';ctx.fillStyle='rgba(200,220,240,.75)';ctx.fillText('SP: Punto de muestreo',lX+22,lY+13);
+  ctx.beginPath();ctx.moveTo(lX+7,lY+30);ctx.lineTo(lX+17,lY+30+5);ctx.lineTo(lX+17,lY+30-5);ctx.lineTo(lX+7,lY+30+5);ctx.lineTo(lX+7,lY+30-5);ctx.closePath();
+  ctx.fillStyle='rgba(200,220,255,.7)';ctx.fill();ctx.strokeStyle='#0a1a30';ctx.stroke();
+  ctx.fillStyle='rgba(200,220,240,.75)';ctx.fillText('Válvula de control',lX+22,lY+30);
+  ctx.textBaseline='alphabetic';
 }
 
 /* ── JAR CANVAS ── */
@@ -645,16 +1106,46 @@ function generateSuggestions(){
   if(treated.turb>nm.turb){if(S.filt.type==='sand')sug.push({cat:'Filtración',col:'#7c4dff',title:'Mejorar sistema de filtración',body:`Filtro de arena produce ${treated.turb.toFixed(2)} NTU. Cambiar a <b>filtro dual o triple</b> puede reducir por debajo de ${nm.turb} NTU.`});if(simR.ofr>4)sug.push({cat:'Sedimentación',col:'#ffab40',title:'Reducir tasa de desbordamiento',body:`Tasa actual: <b>${simR.ofr.toFixed(2)} m/h</b>. Aumentar área a <b>${Math.ceil(S.Q*3.6/3)} m²</b> o instalar placas inclinadas.`});}
   if(!ev.clOk&&S.dis.type!=='uv')sug.push({cat:'Desinfección',col:'#ff6d00',title:'Ajustar dosis de desinfectante',body:`Cloro residual: <b>${simR.residual.toFixed(2)} mg/L</b> (mínimo ${nm.flag}: ${nm.clResMin} mg/L). Aumentar dosis a <b>${(simR.demand+nm.clResMin+.3).toFixed(1)} mg/L</b>.`});
   if(r.alk<50)sug.push({cat:'Alcalinidad',col:'#40c4ff',title:'Alcalinidad insuficiente para coagulación',body:`Alcalinidad: <b>${r.alk} mg/L CaCO₃</b>. Agregar <b>cal o bicarbonato de sodio</b> para elevar a ≥ 80 mg/L.`});
+  if(simR.alkBal&&!simR.alkBal.adequate)sug.push({cat:'Alcalinidad residual',col:'#ff1744',title:'Alcalinidad residual crítica',body:`Residual tras coagular: <b>${simR.alkBal.residual.toFixed(1)} mg/L CaCO₃</b> (requerido ≥ 15). La coagulación fallará y el pH caerá. Añadir <b>cal Ca(OH)₂ ${Math.max(5,(15-simR.alkBal.residual)*0.07).toFixed(1)} mg/L</b>.`});
+  if(simR.metalRes){const lim=c.mRes==='Al'?nm.alMax:nm.feMax;if(simR.metalRes>lim)sug.push({cat:'Metal residual',col:'#ff6d00',title:c.mRes+' residual excede norma',body:`<b>${simR.metalRes.toFixed(3)} mg/L</b> (límite ${lim}). Causa: pH fuera de mínima solubilidad (óptimo ${CC_PH[S.coag.type].toFixed(1)}). Ajustar pH con ${wPH>CC_PH[S.coag.type]?'H₂SO₄':'Cal'}.`});}
+  if(simR.thms&&simR.thms>nm.thmMax)sug.push({cat:'THMs',col:'#ff1744',title:'THMs exceden norma',body:`<b>${simR.thms.toFixed(1)} μg/L</b> (límite ${nm.thmMax}). Reducir precursores: mejorar remoción de color antes de cloración, o cambiar a <b>ClO₂/UV/Ozono</b>.`});
+  if(simR.G_floc&&(simR.G_floc<20||simR.G_floc>80))sug.push({cat:'Hidráulica',col:'#7c4dff',title:'Gradiente de floculación fuera de rango',body:`G floculador: <b>${simR.G_floc.toFixed(0)} s⁻¹</b> (óptimo 20–80). Ajustar potencia o volumen del floculador. Gt = ${(simR.Gt_floc/1000).toFixed(0)}k (rango 30k–150k).`});
+  if(simR.lsi&&Math.abs(simR.lsi)>0.5){const tipo=simR.lsi<0?'corrosiva':'incrustante';sug.push({cat:'LSI',col:'#40c4ff',title:`Agua ${tipo} (LSI ${simR.lsi.toFixed(2)})`,body:`${simR.lsi<0?'Agregar cal o bicarbonato para subir alcalinidad y pH.':'Reducir pH con CO₂ o ácido; considerar inhibidor de incrustación.'} Rango ideal: −0.5 a +0.5.`});}
   if(!sug.length)return`<div style="background:rgba(0,200,83,.08);border:1px solid rgba(0,200,83,.2);border-radius:10px;padding:12px 15px;font-size:11px;color:var(--ok);line-height:1.7"><b>✓ Proceso optimizado</b><br>Todos los parámetros cumplen la norma ${nm.flag} ${nm.name}. Color tratado: <b>${treated.color.toFixed(1)} UPC</b> · Turbidez: <b>${treated.turb.toFixed(2)} NTU</b>.</div>`;
-  return`<div style="font-size:12px;font-weight:500;color:var(--tx);margin-bottom:8px">Tratamiento sugerido — ${sug.length} acción${sug.length>1?'es':''} recomendada${sug.length>1?'s':''}</div><div style="display:flex;flex-direction:column;gap:7px">${sug.map(s=>`<div style="background:var(--sf);border:1px solid var(--bd);border-left:3px solid ${s.col};border-radius:8px;padding:9px 13px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="background:${s.col}22;color:${s.col};border-radius:4px;padding:1px 7px;font-size:10px;font-weight:500">${s.cat}</span><span style="font-size:12px;font-weight:500;color:#fff">${s.title}</span></div><div style="font-size:11px;color:var(--mt);line-height:1.7">${s.body}</div></div>`).join('')}</div>`;
+  return`<div style="font-size:12px;font-weight:500;color:var(--tx);margin-bottom:8px">Tratamiento sugerido — ${sug.length} acción${sug.length>1?'es':''} recomendada${sug.length>1?'s':''}</div><div style="display:flex;flex-direction:column;gap:7px">${sug.map(s=>`<div style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:9px 13px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="background:var(--sf2);color:var(--tx);border:1px solid var(--bd);border-radius:4px;padding:1px 7px;font-size:10px;font-weight:500">${s.cat}</span><span style="font-size:12px;font-weight:500;color:#fff">${s.title}</span></div><div style="font-size:11px;color:var(--mt);line-height:1.7">${s.body}</div></div>`).join('')}</div>`;
 }
 
 function updateResultsPanel(){
   const ss=simR.stages;if(!ss||!ss.length)return;
-  const rawWater=ss[0],treatedWater=ss[ss.length-1],nm=getNorm(),ev=evalWater(treatedWater,simR.residual);
+  const rawWater=ss[0],treatedWater=ss[ss.length-1],nm=getNorm(),ev=evalWater(treatedWater,simR.residual,simR);
+  const c=CP[S.coag.type];
   document.getElementById('normHdr').innerHTML=`<div style="font-size:22px;line-height:1">${nm.flag}</div><div><div class="norm-title">${nm.name} — ${nm.ref}</div><div class="norm-desc">Evaluación sobre <b style="color:var(--hi)">agua tratada (efluente)</b> — color crudo: ${rawWater.color.toFixed(1)} UPC → tratado: <b style="color:${ev.colorOk?'var(--ok)':'var(--er)'}">${simR.treatedColor.toFixed(1)} UPC</b></div></div><div style="margin-left:auto">${ev.allOk?`<span class="sok">${nm.label}</span>`:ev.partOk?`<span class="swn">${nm.labelWarn}</span>`:`<span class="sbd">${nm.labelFail}</span>`}</div>`;
-  const checks=[{param:'Turbidez agua tratada',val:treatedWater.turb.toFixed(2)+' NTU',limit:'≤ '+nm.turb+' NTU',ok:ev.turbOk,warn:ev.turbWarn},{param:'Color agua tratada',val:simR.treatedColor.toFixed(1)+' UPC',limit:'≤ '+nm.color+' UPC',ok:ev.colorOk,warn:ev.colorOk},{param:'pH agua tratada',val:treatedWater.pH.toFixed(2),limit:`${nm.pHmin} – ${nm.pHmax}`,ok:ev.pHOk,warn:ev.pHOk},{param:'Cloro residual libre',val:simR.residual.toFixed(2)+' mg/L',limit:`${nm.clResMin}–${nm.clResMax} mg/L`,ok:ev.clOk,warn:simR.residual>0},{param:'Remoción turbidez',val:((1-treatedWater.turb/rawWater.turb)*100).toFixed(1)+'%',limit:'> 95% recomendado',ok:treatedWater.turb/rawWater.turb<.05,warn:treatedWater.turb/rawWater.turb<.15},{param:'Reducción color cruda→tratada',val:rawWater.color.toFixed(0)+' → '+simR.treatedColor.toFixed(1)+' UPC',limit:'Tratada ≤ '+nm.color+' UPC',ok:ev.colorOk,warn:simR.treatedColor<=nm.color*1.5}];
-  document.getElementById('compSummary').innerHTML=checks.map(c=>`<div class="cs-box ${c.ok?'cs-ok':c.warn?'cs-warn':'cs-fail'}"><div class="cs-param">${c.param}</div><div class="cs-val" style="color:${c.ok?'var(--ok)':c.warn?'var(--wn)':'var(--er)'}">${c.val}</div><div class="cs-limit">Límite: ${c.limit}</div><div style="margin-top:4px"><span class="norm-comply ${c.ok?'nc-ok':c.warn?'nc-na':'nc-fail'}">${c.ok?'✓ Cumple':c.warn?'⚠ Marginal':'✗ No cumple'}</span></div></div>`).join('');
+  const metalLimit = c.mRes==='Al'?nm.alMax:nm.feMax;
+  const lsiLabel = simR.lsi<-0.5?'Corrosiva':simR.lsi>0.5?'Incrustante':'Equilibrada';
+  const lsiOk = Math.abs(simR.lsi)<=0.5;
+  const checks=[
+    {param:'Turbidez agua tratada',val:treatedWater.turb.toFixed(2)+' NTU',limit:'≤ '+nm.turb+' NTU',ok:ev.turbOk,warn:ev.turbWarn},
+    {param:'Color agua tratada',val:simR.treatedColor.toFixed(1)+' UPC',limit:'≤ '+nm.color+' UPC',ok:ev.colorOk,warn:ev.colorOk},
+    {param:'pH agua tratada',val:treatedWater.pH.toFixed(2),limit:`${nm.pHmin} – ${nm.pHmax}`,ok:ev.pHOk,warn:ev.pHOk},
+    {param:'Cloro residual libre',val:simR.residual.toFixed(2)+' mg/L',limit:`${nm.clResMin}–${nm.clResMax} mg/L`,ok:ev.clOk,warn:simR.residual>0},
+    {param:c.mRes+' residual',val:simR.metalRes.toFixed(3)+' mg/L',limit:'≤ '+metalLimit+' mg/L',ok:ev.metalOk,warn:simR.metalRes<=metalLimit*1.5},
+    {param:'THMs estimados',val:(simR.thms||0).toFixed(1)+' μg/L',limit:'≤ '+nm.thmMax+' μg/L',ok:ev.thmOk,warn:(simR.thms||0)<=nm.thmMax*1.2},
+    {param:'Alcalinidad residual',val:simR.alkBal.residual.toFixed(1)+' mg/L',limit:'≥ 15 mg/L CaCO₃',ok:simR.alkBal.adequate,warn:simR.alkBal.residual>=5},
+    {param:'Índice Langelier (LSI)',val:simR.lsi.toFixed(2)+' ('+lsiLabel+')',limit:'−0.5 a +0.5',ok:lsiOk,warn:Math.abs(simR.lsi)<=1},
+    {param:'CT Giardia (real vs req.)',val:simR.ctVal.toFixed(1)+' / '+simR.ctReqReal.toFixed(0),limit:'CT ≥ req. (3-log)',ok:simR.ctVal>=simR.ctReqReal,warn:simR.ctVal>=simR.ctReqReal*0.7}
+  ];
+  document.getElementById('compSummary').innerHTML=checks.map(c=>`<div class="cs-box ${c.ok?'':'cs-fail'}"><div class="cs-param">${c.param}</div><div class="cs-val" style="color:${c.ok?'var(--tx)':'var(--er)'}">${c.val}</div><div class="cs-limit">Límite: ${c.limit}</div><div style="margin-top:4px"><span class="norm-comply ${c.ok?'nc-ok':'nc-fail'}">${c.ok?'✓ Cumple':'✗ No cumple'}</span></div></div>`).join('');
+  // Panel operacional (G, Gt, lodos, costos)
+  let opPanel=document.getElementById('opPanel');
+  if(!opPanel){opPanel=document.createElement('div');opPanel.id='opPanel';opPanel.style.cssText='margin-top:12px';document.getElementById('pRes').appendChild(opPanel);}
+  opPanel.innerHTML=`
+    <div style="font-size:12px;font-weight:500;color:var(--tx);margin:8px 0">Parámetros hidráulicos y operacionales</div>
+    <div class="comply-summary">
+      <div class="cs-box"><div class="cs-param">G mezcla rápida</div><div class="cs-val">${simR.G_rapid.toFixed(0)} s⁻¹</div><div class="cs-limit">Rango: 700–1000 s⁻¹</div></div>
+      <div class="cs-box"><div class="cs-param">G floculación</div><div class="cs-val">${simR.G_floc.toFixed(0)} s⁻¹</div><div class="cs-limit">Rango: 20–80 s⁻¹</div></div>
+      <div class="cs-box"><div class="cs-param">Número de Camp (Gt)</div><div class="cs-val">${(simR.Gt_floc/1000).toFixed(0)}k</div><div class="cs-limit">30k–150k adim.</div></div>
+      <div class="cs-box"><div class="cs-param">Lodos generados</div><div class="cs-val">${simR.sludge.kgPerDay.toFixed(1)} kg/d</div><div class="cs-limit">${simR.sludge.total_mgL.toFixed(0)} mg/L MS</div></div>
+    </div>`;
   const sugEl=document.getElementById('sugBox');if(sugEl)sugEl.innerHTML=generateSuggestions();
   let html='';
   ss.forEach((st,i)=>{
@@ -666,16 +1157,28 @@ function updateResultsPanel(){
   document.getElementById('rtb').innerHTML=html;
 }
 
-function generateReport(){
+async function generateReport(makePublic=false){
   const ss=simR.stages;if(!ss||!ss.length)return;
   const raw=ss[0],fin=ss[ss.length-1],nm=getNorm(),ev=evalWater(fin,simR.residual);
-  const now=new Date(),ds=now.toLocaleDateString('es-ES'),ts=now.toLocaleTimeString('es-ES');
+  const dataTypeLabel=dataType==='real'
+    ?'<span style="color:#1b7a32;font-weight:bold">✓ Datos de Planta Real — medidos en laboratorio</span>'
+    :'<span style="color:#7a5200;font-weight:bold">⚠ Datos Empíricos — estimaciones del operador</span>';
+  const dataTypeNote=dataType==='real'
+    ?'Parámetros obtenidos de mediciones reales de laboratorio. Alta confiabilidad.'
+    :'Parámetros basados en estimaciones empíricas. Validar con laboratorio antes de decisiones operativas.';
   const simTitle=document.getElementById('simName').value||'Sin nombre';
   const wPH=computePH(S.raw.pH,S.coag.phProduct,S.coag.phDose,S.raw.alk),d=DP[S.dis.type];
   const evalR=(label,val,crit,ok,warn)=>`<tr><td>${label}</td><td>${val}</td><td>${crit}</td><td style="color:${ok?'#1b7a32':warn?'#7a5200':'#7a1a1a'};font-weight:bold">${ok?'✓ CUMPLE':warn?'⚠ MARGINAL':'✗ NO CUMPLE'}</td></tr>`;
   const stageRows=ss.map((st,i)=>{const tR=i===0?'—':((1-st.turb/raw.turb)*100).toFixed(1)+'%';const tv=st.turb<.01?st.turb.toFixed(3):st.turb<1?st.turb.toFixed(2):st.turb.toFixed(1);const res=st.residual>0?st.residual.toFixed(2)+' mg/L':'—';const bg=i===ss.length-1?'background:#e8f0ff;font-weight:bold':'';return`<tr style="${bg}"><td>${st.name}</td><td>${tv}</td><td>${tR}</td><td>${st.color.toFixed(1)}</td><td>${st.pH.toFixed(2)}</td><td>${res}</td></tr>`;}).join('');
   const html=`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>TERAH2O — Informe</title><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;font-size:10.5px;color:#1a2a3a;background:#fff}@page{size:A4;margin:14mm 16mm}.pb{page-break-before:always}.hdr{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid #1565c0;padding-bottom:10px;margin-bottom:14px}.brand{font-family:Arial,sans-serif;font-size:24px;font-weight:600;letter-spacing:3px;color:#1565c0;line-height:1}.brand span{color:#0288d1}.brand-sub{font-size:9px;color:#888;letter-spacing:1px;text-transform:uppercase;margin-top:3px}.ri{text-align:right;font-size:10px;color:#555}.rt2{font-size:13px;font-weight:bold;color:#1a2a3a;margin-bottom:2px}.sn{font-size:11px;color:#1565c0;font-style:italic}.norm-box{background:#e3f2fd;border:1px solid #90caf9;border-radius:6px;padding:9px 12px;margin-bottom:12px;display:flex;align-items:center;gap:10px}.nb-flag{font-size:20px}.nb-info{flex:1}.nb-title{font-size:12px;font-weight:bold;color:#0d47a1}.nb-ref{font-size:10px;color:#555}h2{font-size:11px;font-weight:bold;color:#1565c0;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid #cdd9f0;padding-bottom:4px;margin:14px 0 8px}.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}.sb{border:1px solid;border-radius:6px;padding:8px 10px}.sv{font-size:16px;font-weight:bold;line-height:1.2}.sl2{font-size:9px;color:#555;margin-top:2px}.sb-ok{background:#e8f5e9;border-color:#a5d6a7}.sb-ok .sv{color:#1b7a32}.sb-w{background:#fff8e1;border-color:#ffe082}.sb-w .sv{color:#7a5200}.sb-b{background:#ffebee;border-color:#ef9a9a}.sb-b .sv{color:#7a1a1a}table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:10px}th{background:#1565c0;color:#fff;padding:5px 7px;text-align:left;font-weight:bold}td{padding:4px 7px;border-bottom:1px solid #e0e8f8}tr:nth-child(even) td{background:#f5f8ff}tr:last-child td{border-bottom:2px solid #cdd9f0}.ft{margin-top:12px;border-top:1px solid #e0e8f8;padding-top:6px;font-size:9px;color:#888;display:flex;justify-content:space-between}.pbtn{display:block;margin:18px auto;background:#1565c0;color:#fff;border:none;padding:12px 28px;border-radius:8px;font-size:13px;cursor:pointer;font-family:Arial}@media print{.pbtn{display:none}}</style></head><body>
-  <div class="hdr"><div><div class="brand">TERA<span>H2O</span></div><div class="brand-sub">✨ Inteligencia Operativa</div></div><div class="ri"><div class="rt2">Informe de Simulación — Planta de Tratamiento de Agua Potable Convencional</div><div class="sn">Simulación: ${simTitle}</div><div>${ds} | ${ts}</div></div></div>
+  <div class="hdr"><div><div class="brand">TERA<span>H2O</span></div><div class="brand-sub">✨ Inteligencia Operativa</div></div>
+  <div class="ri">
+    <div class="rt2">Informe de Simulación — Planta de Tratamiento de Agua Potable Convencional</div>
+    <div class="sn">Simulación: ${simTitle}</div>
+    <div style="margin:4px 0">${dataTypeLabel}</div>
+    <div style="font-size:9px;color:#666">${dataTypeNote}</div>
+    <div>${ds} | ${ts}${makePublic?' | <span style="color:#1b7a32">Compartido en Bitácora Pública TERAH2O</span>':''}</div>
+  </div></div>
   <div class="norm-box"><div class="nb-flag">${nm.flag}</div><div class="nb-info"><div class="nb-title">${nm.name} — ${nm.ref}</div><div class="nb-ref">Turbidez ≤ ${nm.turb} NTU · Color ≤ ${nm.color} UPC · pH ${nm.pHmin}–${nm.pHmax} · Cl residual ${nm.clResMin}–${nm.clResMax} mg/L</div></div><div style="font-size:13px;font-weight:bold;color:${ev.allOk?'#1b7a32':ev.partOk?'#7a5200':'#7a1a1a'}">${ev.allOk?'✓ APTA':ev.partOk?'⚠ ACEPTABLE':'✗ NO APTA'}</div></div>
   <h2>1. Resumen ejecutivo</h2><div class="sg"><div class="sb ${ev.allOk?'sb-ok':ev.partOk?'sb-w':'sb-b'}"><div class="sv">${ev.allOk?'APTA':ev.partOk?'ACEPTABLE':'NO APTA'}</div><div class="sl2">Según ${nm.name} — ${nm.ref}</div></div><div class="sb sb-ok"><div class="sv">${((1-fin.turb/raw.turb)*100).toFixed(1)}%</div><div class="sl2">Remoción turbidez total</div></div><div class="sb"><div class="sv">${S.Q} L/s</div><div class="sl2">${(S.Q*3.6).toFixed(0)} m³/h = ${(S.Q*86.4).toFixed(0)} m³/d</div></div></div>
   <h2>2. Agua cruda</h2><table><tr><th>Parámetro</th><th>Valor</th><th>Unidad</th></tr><tr><td>Turbidez</td><td>${S.raw.turb}</td><td>NTU</td></tr><tr><td>Color aparente</td><td>${S.raw.color}</td><td>UPC</td></tr><tr><td>pH</td><td>${S.raw.pH.toFixed(1)}</td><td>—</td></tr><tr><td>Alcalinidad</td><td>${S.raw.alk}</td><td>mg/L CaCO₃</td></tr><tr><td>Temperatura</td><td>${S.raw.temp}</td><td>°C</td></tr></table>
@@ -688,6 +1191,87 @@ function generateReport(){
 }
 
 function g(id){return document.getElementById(id);}
+
+/* ── CALIBRATION (jar test CSV) ── */
+function downloadJarTemplate(){
+  const csv='dose_mg_L,turb_final_NTU,pH_final,color_final_UPC\n'+
+    '10,45,7.1,35\n'+
+    '20,18,7.0,18\n'+
+    '30,6,6.9,10\n'+
+    '40,3.5,6.8,7\n'+
+    '50,2.8,6.7,6\n'+
+    '60,4.1,6.6,8\n'+
+    '80,8.5,6.4,14\n';
+  const blob=new Blob([csv],{type:'text/csv'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='plantilla_jar_test.csv';a.click();URL.revokeObjectURL(url);
+}
+function loadJarCSV(ev){
+  const f=ev.target.files[0];if(!f)return;
+  const rd=new FileReader();
+  rd.onload=e=>{
+    try{
+      const lines=e.target.result.split(/\r?\n/).filter(l=>l.trim()&&!l.startsWith('#'));
+      const hdr=lines[0].toLowerCase().split(',').map(s=>s.trim());
+      const iD=hdr.findIndex(h=>h.includes('dose')||h.includes('dosis'));
+      const iT=hdr.findIndex(h=>h.includes('turb'));
+      const iP=hdr.findIndex(h=>h.includes('ph'));
+      const iC=hdr.findIndex(h=>h.includes('color'));
+      if(iD<0||iT<0)throw new Error('Faltan columnas dose o turb');
+      const rows=[];
+      for(let i=1;i<lines.length;i++){
+        const c=lines[i].split(',').map(s=>s.trim());
+        const d=parseFloat(c[iD]),t=parseFloat(c[iT]);
+        if(isNaN(d)||isNaN(t))continue;
+        rows.push({dose:d,turb:t,pH:iP>=0?parseFloat(c[iP]):null,color:iC>=0?parseFloat(c[iC]):null});
+      }
+      if(rows.length<3)throw new Error('Se requieren al menos 3 puntos');
+      const opt=rows.reduce((a,b)=>b.turb<a.turb?b:a);
+      const rawTurb=S.raw.turb||150;
+      const obsEff=1-opt.turb/rawTurb;
+      const c=CP[S.coag.type];
+      const expEff=c.te*.85;
+      const factor=Math.max(.5,Math.min(1.3,obsEff/expEff));
+      calibData={rows,optimal:opt,factor,coag:S.coag.type,ts:new Date().toISOString()};
+      // Auto-ajustar dosis al óptimo medido
+      const slDC=document.getElementById('slDC');
+      if(slDC&&opt.dose>=+slDC.min&&opt.dose<=+slDC.max){slDC.value=Math.round(opt.dose);}
+      renderCalibTable();update();
+    }catch(err){
+      g('calibStatus').innerHTML='<span style="color:var(--er)">✗ Error: '+err.message+'</span>';
+    }
+    ev.target.value='';
+  };
+  rd.readAsText(f);
+}
+function renderCalibTable(){
+  const box=g('calibTable'),st=g('calibStatus'),btn=g('clearCalibBtn');
+  if(!calibData){box.innerHTML='';if(st)st.textContent='';if(btn)btn.style.display='none';return;}
+  if(btn)btn.style.display='inline-block';
+  const opt=calibData.optimal;
+  st.innerHTML=`<span style="color:var(--ok)">✓ Calibrado</span> · Óptimo: ${opt.dose} mg/L → ${opt.turb} NTU · Factor: ${calibData.factor.toFixed(2)}×`;
+  let h='<table class="calib-table"><tr><th>Dosis (mg/L)</th><th>Turb final (NTU)</th><th>pH</th><th>Color</th></tr>';
+  calibData.rows.forEach(r=>{h+=`<tr class="${r===opt?'opt':''}"><td>${r.dose}</td><td>${r.turb.toFixed(2)}</td><td>${r.pH!=null?r.pH.toFixed(2):'—'}</td><td>${r.color!=null?r.color.toFixed(1):'—'}</td></tr>`;});
+  h+='</table><div class="calib-note">El modelo usa estos datos como factor de corrección sobre la eficiencia teórica del coagulante. Óptimo detectado → curva en verde.</div>';
+  box.innerHTML=h;
+}
+function clearCalib(){calibData=null;renderCalibTable();update();}
+
+/* ── EXPORT BITÁCORA CSV ── */
+async function exportBitCSV(){
+  try{
+    const keys=await window.storage.list('bit:',true);
+    const all=keys&&keys.keys?keys.keys:[];
+    if(!all.length){alert('No hay registros en la bitácora para exportar.');return;}
+    const entries=(await Promise.all(all.map(async k=>{try{const r=await window.storage.get(k,true);return r?JSON.parse(r.value):null;}catch{return null;}}))).filter(Boolean).sort((a,b)=>new Date(a.ts)-new Date(b.ts));
+    const cols=['id','ts','name','dataType','norm','Q_Ls','rawTurb_NTU','rawColor_UPC','rawPH','rawAlk_mg_L','rawTemp_C','coag','coagDose_mg_L','coagPH','coagPHDose','poly','polyDose','sed','sedArea_m2','filt','filtRate_m_d','dis','disDose','disCT_min','finalTurb_NTU','finalColor_UPC','finalPH','residual_mg_L','metalRes_mg_L','thm_ug_L','lsi','slurry_kg_d','apta','warn','label'];
+    const esc=v=>v==null?'':(/[,"\n]/.test(String(v))?'"'+String(v).replace(/"/g,'""')+'"':String(v));
+    const rows=entries.map(e=>cols.map(c=>esc(e[c]!==undefined?e[c]:'')).join(','));
+    const csv='\ufeff'+cols.join(',')+'\n'+rows.join('\n');
+    const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download='bitacora_terah2o_'+new Date().toISOString().slice(0,10)+'.csv';a.click();URL.revokeObjectURL(url);
+  }catch(e){alert('Error exportando: '+e.message);}
+}
+
 function update(){
   S.Q=+g('slQ').value;S.raw.turb=+g('slTb').value;S.raw.color=+g('slCl').value;S.raw.pH=+g('slPH').value/10;S.raw.alk=+g('slAl').value;S.raw.temp=+g('slTp').value;
   S.coag.type=g('selCg').value;S.coag.dose=+g('slDC').value;S.coag.phProduct=g('selPHA').value;S.coag.phDose=+g('slPHD').value;
@@ -696,14 +1280,24 @@ function update(){
   const d=DP[S.dis.type],c=CP[S.coag.type],nm=getNorm(),wPH=computePH(S.raw.pH,S.coag.phProduct,S.coag.phDose,S.raw.alk);
   g('qLs').textContent=S.Q;g('qd').innerHTML=`${(S.Q*3.6).toFixed(0)} m³/h<br>${(S.Q*86.4).toFixed(0)} m³/d`;
   g('vTb').textContent=S.raw.turb+' NTU';g('vCl').textContent=S.raw.color+' UPC';g('vPH').textContent=S.raw.pH.toFixed(1);g('vAl').textContent=S.raw.alk+' mg/L';g('vTp').textContent=S.raw.temp+' °C';
-  g('vDC').textContent=S.coag.dose+' mg/L';g('vPHD').textContent=S.coag.phDose+' mg/L';g('vPHR').textContent=wPH.toFixed(2);g('vOP').textContent=c.opt;g('vAC').textContent=(c.ak*S.coag.dose).toFixed(1)+' mg/L CaCO₃';
+  g('vDC').textContent=S.coag.dose+' mg/L';g('vPHD').textContent=S.coag.phDose+' mg/L';g('vPHR').textContent=wPH.toFixed(2);g('vOP').textContent=c.opt;
+  const _alkB=alkalinityBalance(S.coag.type,S.coag.dose,S.raw.alk);
+  g('vAC').textContent=_alkB.consumed.toFixed(1)+' mg/L CaCO₃';
+  const arEl=g('vAR');if(arEl){arEl.innerHTML=_alkB.residual.toFixed(1)+' mg/L '+(_alkB.adequate?'<span style="color:var(--ok)">✓</span>':_alkB.residual>=5?'<span style="color:var(--wn)">⚠ marginal</span>':'<span style="color:var(--er)">✗ añadir cal</span>');}
+  const _mR=metalResidual(S.coag.type,wPH,S.coag.dose,S.raw.temp);
+  const mnEl=g('vMN');if(mnEl)mnEl.textContent=c.mRes;
+  const mrEl=g('vMR');if(mrEl){const lim=c.mRes==='Al'?nm.alMax:nm.feMax;mrEl.innerHTML=_mR.toFixed(3)+' mg/L (lím '+lim+') '+(_mR<=lim?'<span style="color:var(--ok)">✓</span>':'<span style="color:var(--er)">✗</span>');}
   g('vDP').textContent=S.poly.dose+' mg/L';g('vSA').textContent=S.sed.area+' m²';g('vFR').textContent=S.filt.rate+' m/d';
   g('dLbl').textContent='Dosis ('+d.unit+')';g('vDD').textContent=S.dis.dose+' '+d.unit;g('vCT').textContent=S.dis.ct+' min';g('vBP').textContent=d.bp;
   simR=runSim();
   const{stages:ss,ctVal,ofr,sedEff,demand,residual,treatedColor}=simR;
   g('vOFv').textContent=ofr.toFixed(2)+' m/h';g('vHR').textContent='~'+(S.sed.area*3.5/(S.Q*3.6)*60).toFixed(0)+' min';g('vSE').textContent=(sedEff*100).toFixed(1)+'%';
   if(S.dis.type==='uv'){g('vCV').textContent=S.dis.dose+' mJ/cm²';g('vCR').textContent='Req.≥'+d.ctG+' '+(S.dis.dose>=d.ctG?'✓':'⚠');g('vRS').textContent='N/A';g('vDem').textContent='N/A';}
-  else{g('vCV').textContent=ctVal.toFixed(1)+' mg·min/L';g('vCR').textContent='Req.'+d.ctG+' '+(ctVal>=d.ctG?'✓ OK':'⚠ Insuf.');g('vRS').textContent=residual.toFixed(2)+' mg/L';g('vDem').textContent=demand.toFixed(2)+' mg/L';}
+  else{g('vCV').textContent=ctVal.toFixed(1)+' mg·min/L';
+    const ctReq=(S.dis.type==='naclo'||S.dis.type==='cl2')?ctRequiredGiardia(wPH,S.raw.temp):d.ctG;
+    g('vCR').innerHTML=ctReq.toFixed(0)+' mg·min/L '+(ctVal>=ctReq?'<span style="color:var(--ok)">✓ OK</span>':'<span style="color:var(--er)">⚠ Insuf.</span>');
+    g('vRS').textContent=residual.toFixed(2)+' mg/L';g('vDem').textContent=demand.toFixed(2)+' mg/L';}
+  const thmEl=g('vTHM');if(thmEl){if(S.dis.type==='naclo'||S.dis.type==='cl2'){const _thm=estimateTHMs(S.raw.color,S.dis.dose,wPH,S.raw.temp,S.dis.ct);thmEl.innerHTML=_thm.toFixed(1)+' μg/L (lím '+nm.thmMax+') '+(_thm<=nm.thmMax?'<span style="color:var(--ok)">✓</span>':'<span style="color:var(--er)">✗</span>');}else thmEl.textContent='N/A ('+DISN[S.dis.type]+')';}
   g('vLG').textContent=(S.dis.type==='uv'?S.dis.dose/d.ctG:ctVal/d.ctG).toFixed(2)+' log';
   const raw2=ss[0],fin2=ss[ss.length-1],ev=evalWater(fin2,residual);
   g('mTR').textContent=((1-fin2.turb/raw2.turb)*100).toFixed(1)+'%';g('mTF').textContent=fin2.turb.toFixed(2)+' NTU';g('mOF').textContent=ofr.toFixed(2);
@@ -714,12 +1308,14 @@ function update(){
 
 function loop(){tick++;drawPlant();drawJars();requestAnimationFrame(loop);}
 
-document.querySelectorAll('.tab').forEach(t=>{t.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.panel').forEach(x=>{x.classList.remove('on');x.style.display='none';});t.classList.add('on');const p=g(t.dataset.p);p.style.display='grid';p.classList.add('on');if(t.dataset.p==='pJars')buildJarControls();});});
+document.querySelectorAll('.tab').forEach(t=>{t.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.panel').forEach(x=>{x.classList.remove('on');x.style.display='none';});t.classList.add('on');const p=g(t.dataset.p);p.style.display='grid';p.classList.add('on');    if(t.dataset.p==='pJars')buildJarControls();
+    if(t.dataset.p==='pBit')loadBitacora();});});
 
+document.getElementById('pdfModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
 function resize(){cv.width=cv.offsetWidth;cv.height=440;jcv.width=jcv.offsetWidth;jcv.height=210;}
 document.querySelectorAll('input[type=range],select').forEach(el=>{el.addEventListener('input',update);el.addEventListener('change',update);});
 window.addEventListener('resize',resize);
-resize();update();loop();
+resize();update();loop();loadBitacora();renderCalibTable();
 </script>
 </body>
 </html>
